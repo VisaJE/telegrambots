@@ -6,7 +6,7 @@ import telepot
 def handler(msg):
 	try:
 		chat_id = msg['chat']['id']
-		if msg['text'].lower().find('edistyykö') + 1:
+		if msg['text'].lower().find('edistyyk') + 1:
     
 			bot.sendMessage(
 				chat_id,
