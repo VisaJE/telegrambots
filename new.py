@@ -22,7 +22,7 @@ def handler(msg):
 	except Exception:
 		time.sleep(10)
 		#Takes the token as a parameter.
-bot = telepot.Bot('540750088:AAGLEDAgYHG_aIqWSoneVGy6d7SlyJ1c3bY')
+bot = telepot.Bot('')
 bot.message_loop(handler)
 
 while 1:
