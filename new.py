@@ -21,8 +21,13 @@ def handler(msg):
 			)
 	except Exception:
 		time.sleep(10)
-		#Takes the token as a parameter.
-bot = telepot.Bot('')
+#Finds the token.
+with open(/opt/secrets/token.txt, r) as t
+data = t.read().split()
+token = data(data.index("token") + 1)
+
+#Takes the token as a parameter.
+bot = telepot.Bot('token')
 bot.message_loop(handler)
 
 while 1:
