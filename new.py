@@ -25,10 +25,12 @@ def handler(msg):
 with open('/opt/secrets/token.txt', 'r') as t:
     data = t.read().split()
     token = data[data.index('token') + 1]
-
+    print('Finding the token was a great success.')
 #Takes the token as a parameter.
-bot = telepot.Bot(token)
-bot.message_loop(handler)
-
+try:
+    bot = telepot.Bot(token)
+    bot.message_loop(handler)
+except Exception:
+    print('Epic fail.')
 while 1:
-	time.sleep(10)
+	time.sleep(100)
