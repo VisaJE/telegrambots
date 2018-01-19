@@ -14,9 +14,10 @@ def makeplot():
     for i in x:
         y.append(random.randint(0,10))
         y2.append(random.randint(0,10))
-        plt.plot(x, y, x, y2)
+    plt.plot(x, y, x, y2)
     try:
         plt.savefig('kuva.png', bbox_inches='tight')
+        plt.close()
     except Exception:
         print("Creating the picture failed")
         
@@ -36,7 +37,6 @@ def handler(msg):
                     reply_to_message_id=msg['message_id']
             )
         elif msg['text'].lower().find('plot') + 1:
-            print('PLOTTIA')
             makeplot()
             with open('kuva.png', 'rb') as img:
                 bot.sendPhoto(
@@ -45,11 +45,11 @@ def handler(msg):
                     reply_to_message_id=msg['message_id']
                 )
         elif msg['text'].lower().find('perkele') + 1:
-                bot.sendMessage(
+            bot.sendMessage(
                     chat_id,
                     'No huh.',
-                    teply_to_message_id=msg['message_id']
-                )
+                    reply_to_message_id=msg['message_id']
+            )
     except Exception:
         pass
         
@@ -61,7 +61,7 @@ with open('/opt/secrets/token.txt', 'r') as t:
     print('Finding the token was a great success.')
 #Takes the token as a parameter.
 try:
-    bot = telepot.Bot('540750088:AAGLEDAgYHG_aIqWSoneVGy6d7SlyJ1c3bY')
+    bot = telepot.Bot(token)
     bot.message_loop(handler)
 except Exception:
     print('Epic fail.')
