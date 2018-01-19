@@ -15,9 +15,8 @@ def makeplot():
         y.append(random.randint(0,10))
         y2.append(random.randint(0,10))
         plt.plot(x, y, x, y2)
-        plt.close()
     try:
-        plt.savefig('kuva.png', bbox_inches='tight') 
+        plt.savefig('kuva.png', bbox_inches='tight')
     except Exception:
         print("Creating the picture failed")
         
@@ -37,6 +36,7 @@ def handler(msg):
                     reply_to_message_id=msg['message_id']
             )
         elif msg['text'].lower().find('plot') + 1:
+            print('PLOTTIA')
             makeplot()
             with open('kuva.png', 'rb') as img:
                 bot.sendPhoto(
@@ -44,7 +44,12 @@ def handler(msg):
                     img,                    
                     reply_to_message_id=msg['message_id']
                 )
-                    
+        elif msg['text'].lower().find('perkele') + 1:
+                bot.sendMessage(
+                    chat_id,
+                    'No huh.',
+                    teply_to_message_id=msg['message_id']
+                )
     except Exception:
         pass
         
