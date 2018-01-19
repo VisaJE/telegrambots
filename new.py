@@ -13,7 +13,7 @@ def makeplot():
 	y2 = []
 	for i in x:
 		y.append(random.randint(0,10))
-        	y2.append(random.randint(0,10))
+        y2.append(random.randint(0,10))
         plt.plot(x, y, x, y2)
         plt.close()
 	try:
