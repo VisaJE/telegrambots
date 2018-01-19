@@ -25,21 +25,18 @@ def handler(msg):
     try:
         chat_id = msg['chat']['id']
         if msg['text'].lower().find('edistyyk') + 1:
-            print('Chat command issued')
             bot.sendMessage(
                 chat_id,
                 'No ei!',
                 reply_to_message_id=msg['message_id']
             )
         elif msg['text'].lower().find('toimiiko') + 1:
-            print('Chat command issued')
             bot.sendMessage(
                     chat_id,
                     'Onhan tuo mahdollista.',
                     reply_to_message_id=msg['message_id']
             )
         elif msg['text'].lower().find('plot') + 1:
-            print('Plot command issued')
             makeplot()
             with open('kuva.png', 'rb') as img:
                 bot.sendPhoto(
@@ -59,7 +56,7 @@ with open('/opt/secrets/token.txt', 'r') as t:
     print('Finding the token was a great success.')
 #Takes the token as a parameter.
 try:
-    bot = telepot.Bot(token)
+    bot = telepot.Bot('540750088:AAGLEDAgYHG_aIqWSoneVGy6d7SlyJ1c3bY')
     bot.message_loop(handler)
 except Exception:
     print('Epic fail.')
