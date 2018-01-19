@@ -1,6 +1,9 @@
 import time
 import random
 
+import matplotlib
+#This is needed for matplot to work on linux.
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import telepot
 
@@ -10,13 +13,14 @@ def makeplot():
 	y2 = []
 	for i in x:
 		y.append(random.randint(0,10))
-		y2.append(random.randint(0,10))
-	plt.plot(x, y, x, y2)
+        	y2.append(random.randint(0,10))
+        plt.plot(x, y, x, y2)
+        plt.close()
 	try:
-		plt.savefig('kuva.png', bbox_inches='tight')
+		plt.savefig('kuva.png', bbox_inches='tight') 
 	except Exception:
 		print("Creating the picture failed")
-		
+makeplot()		
 		
 def handler(msg):
 	try:
