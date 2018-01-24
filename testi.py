@@ -1,7 +1,7 @@
 import time
 import pgdb
 import getpass
-
+from datetime import datetime, timedelta
 
 username = input('Enter username for SQL: ')
 password = getpass.getpass()
@@ -13,42 +13,29 @@ connection = pgdb.connect(host = hostname,
                           user = username, 
                           database = db
                           )
-
+cur = connection.cursor()
 def get_highscore():
-    try:
-        cur = connection.cursor()
-        cur.execute("SELECT * FROM %s ORDER BY %s DESC, %s"%(table, 'amount', 'date'))
-        result = cur.fetchone()
-        cur.close()
-        return result
-    except:
-        print('There was a problem with fetching data from db.')
+    print('Highscore called')
+    cur.execute("SELECT * FROM %s ORDER BY %s DESC, %s LIMIT 1 "%(table, 'amount', 'date'))
+    return cur.fetchone()
 
 def get_user(input_name):
-    try:
-        cur = connection.cursor()
-        cur.execute("SELECT * FROM %s WHERE name = %s ORDER BY %s DESC"%(table,
+    cur.execute("SELECT * FROM %s WHERE name = '%s' ORDER BY %s DESC LIMIT 1"%(table,
             input_name, 'amount'))
-        result = cur.fetchone()
-        cur.close()
-        return result
-    except:
-        raise ValueError('No datapoints were found for this name.')
+    return cur.fetchone()
+
 
 def print_hs_data():
     result = get_highscore()
     score = result.amount
-    time = result.date
-    text =  'Kovin heiluttelija on %s indeksin arvolla %s.\n'%(result.name,score)
-    'Suoritus tehtiin ajanhetkella.'%(time)
+    time = result.date + timedelta(hours=2)
+    text =  'Kovin heiluttelija on %s indeksin arvolla %s.\n\
+            Saavutus  tehtiin %s'%(result.name,score,time)
     return text
 
 def print_user_data(input_name):
-    try:
-        result = get_user(input_name)
-        return 'Kyseinen heppu heilutteli arvon %s.'%(result.amount)
-    except Exception as e:
-        e.args[0]
+    result = get_user(input_name)
+    return 'Kyseinen heppu heilutteli arvon %s.'%(result.amount)
 
 
 while 1:
